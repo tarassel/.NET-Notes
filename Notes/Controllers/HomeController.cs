@@ -1,4 +1,8 @@
-﻿using System;
+﻿//using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+//using Microsoft.Owin.Security;
+using Notes.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +12,14 @@ namespace Notes.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+
+            var model = db.Notes.ToList();
+
+            return View(model);
         }
 
         public ActionResult About()

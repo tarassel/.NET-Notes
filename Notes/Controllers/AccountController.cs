@@ -57,7 +57,8 @@ namespace Notes.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (SignInManager.AuthenticationManager.User.Identity.IsAuthenticated)
+//            if (SignInManager.AuthenticationManager.User.Identity.IsAuthenticated)
+            if (Request.IsAuthenticated)
                 return RedirectToAction("Index", "Home");
 
             ViewBag.ReturnUrl = returnUrl;

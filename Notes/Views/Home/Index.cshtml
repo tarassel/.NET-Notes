@@ -1,6 +1,19 @@
-﻿@{
+﻿@model IEnumerable<Notes.Models.Note>
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <h2>@item.Name</h2>
+            <p>@item.Text</p>
+            <p>@Html.ActionLink("Edit", "Edit", "Home", new { Id = @item.Id }, new { Class = "btn btn-default" })</p>
+        </div>
+    }
+</div>
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>
