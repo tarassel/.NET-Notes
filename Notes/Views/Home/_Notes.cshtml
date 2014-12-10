@@ -18,8 +18,10 @@
             <h2>@item.Name</h2>
             <p>@item.Text</p>
             <p>
-                @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
-                @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                <div class="btn-group" role="group" aria-label="...">
+                    @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                </div>
             </p>
         </div>
     }

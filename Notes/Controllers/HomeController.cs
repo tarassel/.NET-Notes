@@ -16,11 +16,7 @@ namespace Notes.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            ApplicationDbContext db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-
-            var model = db.Notes.ToList();
-
-            return View(model);
+            return View(HttpContext.GetOwinContext().Get<ApplicationDbContext>());
         }
 
         public ActionResult About()

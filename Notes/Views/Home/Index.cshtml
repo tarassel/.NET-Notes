@@ -1,12 +1,13 @@
-﻿@model IEnumerable<Notes.Models.Note>
+﻿@model Notes.Models.ApplicationDbContext
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Notes";
 }
 
-@Html.Partial("_Notes", Model)
+@Html.Partial("_Notes", Model.Notes.ToList())
 
 <hr/>
+@Html.Partial("_Users")
 <hr />
 <hr />
 <div class="jumbotron">

@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNet.Identity.Owin;
+@using System.Web;
+
+<div class="row">
+    @foreach (var user in HttpContext.Current.GetOwinContext().GetUserManager<Notes.Models.ApplicationDbContext>().Users.ToList())
+    {
+        <div class="col-md-4">
+            <h2>@user.UserName</h2>
+            <p>Id = @user.Id</p>
+        </div>
+    }
+</div>
