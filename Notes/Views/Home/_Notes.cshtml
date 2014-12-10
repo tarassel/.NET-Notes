@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Notes.Models.Note>
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+    }
+</style>
+<hr />
+@Html.ActionLink("Create New Note", "Create", "Note", new { }, new { Class = "btn btn-primary btn-lg center" })
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <h2>@item.Name</h2>
+            <p>@item.Text</p>
+            <p>
+                @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+            </p>
+        </div>
+    }
+</div>
