@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 
 namespace Notes.Controllers
 {
@@ -41,6 +42,11 @@ namespace Notes.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationDbContext db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+                //var user = db.Users.Find(User.Identity.GetUserId());
+                //user.Relations.Add(new NoteRelation{ NoteId = note.Id, UserId = User.Identity.GetUserId()});
+
+//                note.Relations.Add(new NoteRelation { NoteId = note.Id, UserId = User.Identity.GetUserId() });
+                //note.Users.Add(user);
                 db.Notes.Add(note);
                 db.SaveChanges();
 
