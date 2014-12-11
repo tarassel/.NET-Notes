@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Notes.Models
 {
-    public class NoteRelation
+    public class NoteSharing
     {
         public int Id { get; set; }
         public int NoteId { get; set; }

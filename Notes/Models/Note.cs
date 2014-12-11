@@ -10,7 +10,10 @@ namespace Notes.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Text { get; set; }
+		//public ApplicationUser ApplicationUserId { get; set; }
+//		public string ApplicationUserId { get; set; }
 
-        public virtual ICollection<NoteRelation> NoteRelations { get; set; }
+        public virtual ICollection<NoteSharing> SharedUsers { get; set; }
+		public virtual ApplicationUser Owner { get; set; }
     }
 }
