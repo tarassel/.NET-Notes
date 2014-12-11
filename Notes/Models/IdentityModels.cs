@@ -15,7 +15,7 @@ namespace Notes.Models
         //    this.Notes = new HashSet<Note>();
         //}
 
-        public virtual ICollection<NoteRelation> Relations { get; set; }
+        public virtual ICollection<NoteRelation> NoteRelations { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

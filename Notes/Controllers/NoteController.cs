@@ -42,12 +42,13 @@ namespace Notes.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationDbContext db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                //var user = db.Users.Find(User.Identity.GetUserId());
+//                var user = db.Users.Find(User.Identity.GetUserId());
                 //user.Relations.Add(new NoteRelation{ NoteId = note.Id, UserId = User.Identity.GetUserId()});
 
 //                note.Relations.Add(new NoteRelation { NoteId = note.Id, UserId = User.Identity.GetUserId() });
                 //note.Users.Add(user);
                 db.Notes.Add(note);
+				db.NoteRelations.Add(new NoteRelation { NoteId = note.Id, ApplicationUserId = User.Identity.GetUserId() });
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");

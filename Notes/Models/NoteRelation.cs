@@ -10,11 +10,11 @@ namespace Notes.Models
     {
         public int Id { get; set; }
         public int NoteId { get; set; }
-        public string UserId { get; set; }
+		public string ApplicationUserId { get; set; }
 
 //        public virtual ICollection<NoteRelation> Relations { get; set; }
 
         public virtual Note Note { get; set; }
-        public virtual ApplicationUser User{ get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

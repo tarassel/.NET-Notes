@@ -17,13 +17,19 @@
         <div class="col-md-4">
             <h2>@item.Name</h2>
             <p>@item.Text</p>
-            @*<p>Users:@foreach (var user in item.Users) { <p> user.UserName</p> }</p>*@
             <p>
-                <div class="btn-group" role="group" aria-label="...">
-                    @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
-                    @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
-                </div>
-            </p>
-        </div>
+                Users:
+                @foreach (var nr in item.NoteRelations)
+                {
+                <p> @if (nr.ApplicationUser!=null){@nr.ApplicationUser.UserName}</p>
+                }
+                </p>
+                <p>
+                    <div class="btn-group" role="group" aria-label="...">
+                        @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                        @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
+                    </div>
+                </p>
+            </div>
     }
 </div>

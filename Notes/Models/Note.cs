@@ -11,6 +11,6 @@ namespace Notes.Models
         public string Name { get; set; }
         public string Text { get; set; }
 
-        public virtual ICollection<NoteRelation> Relations { get; set; }
+        public virtual ICollection<NoteRelation> NoteRelations { get; set; }
     }
 }
