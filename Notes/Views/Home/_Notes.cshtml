@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Notes.Models.Note>
+@using Microsoft.AspNet.Identity
 
 <style>
     .center {
@@ -14,6 +15,10 @@
 <div class="row">
     @foreach (var item in Model)
     {
+        if (item.Owner.Id != User.Identity.GetUserId())
+        {
+            continue;
+        }
         <div class="col-md-4">
             <h2>@item.Name</h2>
             <p>@item.Text</p>

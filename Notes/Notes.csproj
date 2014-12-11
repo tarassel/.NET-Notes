@@ -234,6 +234,7 @@
     <Content Include="Views\Home\_Notes.cshtml" />
     <Content Include="Views\Note\Edit.cshtml" />
     <Content Include="Views\Home\_Users.cshtml" />
+    <Content Include="Views\Note\_UsersSelect.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
