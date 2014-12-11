@@ -37,14 +37,17 @@ namespace Notes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Note note)
+		public ActionResult Create(Note note, string[] SharedUsersIDs)
         {
             if (ModelState.IsValid)
             {
                 ApplicationDbContext db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-				note.Owner = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
-                db.Notes.Add(note);
-//				db.NoteRelations.Add(new NoteSharing { NoteId = note.Id, ApplicationUserId = User.Identity.GetUserId() });
+//				note.Owner = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(User.Identity.GetUserId());
+				foreach (var item in SharedUsersIDs)
+				{
+					note.SharedUsers.Add(HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item));
+				}
+				db.Notes.Add(note);
                 db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
