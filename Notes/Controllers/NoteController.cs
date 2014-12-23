@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using System.ComponentModel;
 
 namespace Notes.Controllers
 {
@@ -67,13 +68,24 @@ namespace Notes.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(Note note)
+		public ActionResult Edit(Note note/*, string[] SharedUsers*/)
         {
             if (ModelState.IsValid)
             {
                 ApplicationDbContext db = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                db.Entry(note).State = EntityState.Modified;
-                db.SaveChanges();
+
+				//var noteInDb = db.Notes.Include(n => n.SharedUsers)
+				//	.Single(p => p.Id == note.Id);
+				var noteInDb = db.Notes.Single(n => n.Id == note.Id);
+				noteInDb.SharedUsers.Clear();
+
+				//db.Entry(note).State = EntityState.Modified;
+				db.Entry(noteInDb).CurrentValues.SetValues(note);
+
+				foreach (var item in note.SharedUsers)
+					noteInDb.SharedUsers.Add(item);
+
+				db.SaveChanges();
 
                 return RedirectToAction("Index", "Home");
             }

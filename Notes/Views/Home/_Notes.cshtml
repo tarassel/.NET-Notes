@@ -23,17 +23,18 @@
             <h2>@item.Name</h2>
             <p>@item.Text</p>
             @*<p>Owner: -@item.Owner.UserName</p>*@
-            Shared with:
-            <ul>
-            @foreach (var nr in item.SharedUsers)
-            {
-                <li>
-                    @if (nr.UserName!= null)
-                    {@nr.UserName}
-                </li>
-            }
-            </ul>
-            <p>
+			<h6>Shared with:</h6>
+			<h6>
+				<ul>
+					@foreach (var nr in item.SharedUsers)
+					{
+						<li>
+							@nr.UserName
+						</li>
+					}
+				</ul>
+			</h6>
+<p>
                 <div class="btn-group" role="group" aria-label="...">
                     @Html.ActionLink("Edit", "Edit", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })
                     @Html.ActionLink("Delete", "Delete", "Note", new { Id = @item.Id }, new { Class = "btn btn-default" })

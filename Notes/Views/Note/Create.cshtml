@@ -37,7 +37,7 @@
 			<div class="col-md-10">
 				@foreach (var user in HttpContext.Current.GetOwinContext().GetUserManager<Notes.Models.ApplicationDbContext>().Users.ToList())
 				{
-					<input type="checkbox" name="SharedUsersIDs" value="@user.Id" />@user.UserName<<br />
+					<input type="checkbox" name="SharedUsersIDs" value="@user.Id" />@user.UserName<br />
 				}
 			</div>
 		</div>

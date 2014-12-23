@@ -1,7 +1,8 @@
-﻿@model Notes.Models.Note
+﻿@using Microsoft.AspNet.Identity.Owin;
+@model Notes.Models.Note
 
 @{
-    ViewBag.Title = "Edit";
+	ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
@@ -9,42 +10,60 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Note</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+	@Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+	<div class="form-horizontal">
+		<h4>Note</h4>
+		<hr />
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		@Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
-            </div>
-        </div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+			</div>
+		</div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.Text, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.SharedUsers, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@foreach (var user in HttpContext.Current.GetOwinContext().GetUserManager<Notes.Models.ApplicationDbContext>().Users.ToList())
+				{
+					if (Model.SharedUsers.ToList().Exists(au => au.Id == user.Id))
+					{
+						<input type="checkbox" name="SharedUsers" value="@user.Id" checked />@user.UserName<br />
+					}
+					else
+					{
+						<input type="checkbox" name="SharedUsers" value="@user.Id" />@user.UserName<br />
+					}
+
+				}
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Save" class="btn btn-default" />
+			</div>
+		</div>
+	</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index", "Home")
+	@Html.ActionLink("Back to List", "Index", "Home")
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/jqueryval")
 }
